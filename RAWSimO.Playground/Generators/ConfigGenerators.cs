@@ -288,6 +288,8 @@ namespace RAWSimO.Playground.Generators
                 new TurnoverItemStorageConfiguration() { Name = "Class" },
                 // LeastDemand
                 new LeastDemandItemStorageConfiguration() { Name = "LeastDemand" },
+                // Test Order
+                new TestOrderItemStorageConfiguration() { Name = "TestOrder"},
             };
             List<PodStorageConfiguration> podStoragers = new List<PodStorageConfiguration>()
             {
@@ -301,6 +303,8 @@ namespace RAWSimO.Playground.Generators
                 new StationBasedPodStorageConfiguration() { Name = "StationBased" },
                 // Turnover
                 new TurnoverPodStorageConfiguration() { Name = "Class" },
+                // Test Order
+                new TestOrderPodStorageConfiguration() { Name = "TestOrder" },
             };
             List<ReplenishmentBatchingConfiguration> replenishmentBatchers = new List<ReplenishmentBatchingConfiguration>()
             {
