@@ -1,3 +1,8 @@
 Generator->ConfigGenerator.cs
-Dictionary 이름 추가
+이때 xgenc 파일이 있음 뭘까?
+skufiles에 파일을 추가해서 넣으면 선택해서 사용가능
 PathPlanning, TaskAllocation, ItemStorage 순으로 있음
+
+ItemStorageManager.cs
+Pod와 ItemBundle을 갖고 할당, pod값이
+transaction 추가
