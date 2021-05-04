@@ -1,8 +1,18 @@
 Generator->ConfigGenerator.cs
 이때 xgenc 파일이 있음 뭘까?
+GeneratorConfigFile
 skufiles에 파일을 추가해서 넣으면 선택해서 사용가능
 PathPlanning, TaskAllocation, ItemStorage 순으로 있음
 
-ItemStorageManager.cs
++ItemStorageManager.cs
 Pod와 ItemBundle을 갖고 할당, pod값이
 transaction 추가
+
++OrderGenerator.cs
+
+ItemBundle.cs -> ItemInfo.cs
+random order 생성을 지우고 item set을 넣을 수 있음
+order dataset
+var는 자료형이 정해져있지 않은 상태에서 변수 생성시
+foreach는 인자로 들어온 것의 인덱스 끝까지 순환 반복문
+=> : 왼쪽인자를 받아 오른쪽 결과 할당하는 함수
