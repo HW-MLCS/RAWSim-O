@@ -18,7 +18,7 @@ namespace RAWSimO.Core.Info
         /// <returns>The weight of the item.</returns>
         double GetInfoWeight();
         /// <summary>
-        /// The type of the item.
+        /// The type of the item. (Simpleitem & Letter)
         /// </summary>
         ItemType GetInfoType();
         /// <summary>
