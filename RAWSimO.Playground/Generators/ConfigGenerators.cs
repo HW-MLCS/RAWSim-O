@@ -25,6 +25,7 @@ namespace RAWSimO.Playground.Generators
                 {
                     InitialInventory = 0.7,
                     OrderMode = Core.Management.OrderMode.Fill,
+                    // Change OrderMode
                     OrderPositionCountMean = 1,
                     OrderPositionCountStdDev = 0.3,
                     OrderPositionCountMin = 1,
@@ -55,7 +56,7 @@ namespace RAWSimO.Playground.Generators
 
 
             Dictionary<string, string> skuFiles = new Dictionary<string, string> { { "Mu-1000.xgenc", "1000" }, { "Mu-10000.xgenc", "10000" }, };
-            List<int> orderSizeScenarios = new List<int> { 1, 2, 3 };
+            List<int> orderSizeScenarios = new List<int> { 1, 2, 3,4 };
             List<double> returnOrderProbabilities = new List<double> { 0, 0.3 };
 
             //List<int> pickStationCapacities = new List<int> { 6, 12, 18 };
@@ -100,6 +101,15 @@ namespace RAWSimO.Playground.Generators
                                         setting.InventoryConfiguration.OrderPositionCountMin = 2;
                                         setting.InventoryConfiguration.PositionCountMin = 2;
                                         break;
+                                    case 4:
+                                        BundleCount = 200,
+                                        OrderCount = 200,
+                                        InventoryLevelDrivenBundleGeneration = true,
+                                        InventoryLevelDrivenOrderGeneration = true,
+                                        InventoryLevelBundleRestartThreshold = 0.65,
+                                        InventoryLevelBundleStopThreshold = 0.85,
+                                        InventoryLevelOrderRestartThreshold = 0.6,
+                                        InventoryLevelOrderStopThreshold = 0.1,
                                     default: throw new ArgumentException("Unknown order size scenario: " + orderSizeScenario);
                                 }
                                 setting.InventoryConfiguration.ReturnOrderProbability = returnOrderProbability;
