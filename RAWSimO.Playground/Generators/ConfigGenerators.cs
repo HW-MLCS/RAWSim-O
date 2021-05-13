@@ -102,14 +102,10 @@ namespace RAWSimO.Playground.Generators
                                         setting.InventoryConfiguration.PositionCountMin = 2;
                                         break;
                                     case 4:
-                                        BundleCount = 200,
-                                        OrderCount = 200,
-                                        InventoryLevelDrivenBundleGeneration = true,
-                                        InventoryLevelDrivenOrderGeneration = true,
-                                        InventoryLevelBundleRestartThreshold = 0.65,
-                                        InventoryLevelBundleStopThreshold = 0.85,
-                                        InventoryLevelOrderRestartThreshold = 0.6,
-                                        InventoryLevelOrderStopThreshold = 0.1,
+                                        setting.InventoryConfiguration.OrderPositionCountMin = 1;
+                                        setting.InventoryConfiguration.OrderPositionCountMax = 1;
+                                        setting.InventoryConfiguration.PositionCountMin = 2;
+                                        setting.InventoryConfiguration.PositionCountMax = 2;
                                     default: throw new ArgumentException("Unknown order size scenario: " + orderSizeScenario);
                                 }
                                 setting.InventoryConfiguration.ReturnOrderProbability = returnOrderProbability;
@@ -299,7 +295,7 @@ namespace RAWSimO.Playground.Generators
                 // LeastDemand
                 new LeastDemandItemStorageConfiguration() { Name = "LeastDemand" },
                 // Test Order
-                new TestOrderItemStorageConfiguration() { Name = "TestOrder"},
+                // new TestOrderItemStorageConfiguration() { Name = "TestOrder"},
             };
             List<PodStorageConfiguration> podStoragers = new List<PodStorageConfiguration>()
             {
@@ -314,7 +310,7 @@ namespace RAWSimO.Playground.Generators
                 // Turnover
                 new TurnoverPodStorageConfiguration() { Name = "Class" },
                 // Test Order
-                new TestOrderPodStorageConfiguration() { Name = "TestOrder" },
+                // new TestOrderPodStorageConfiguration() { Name = "TestOrder" },
             };
             List<ReplenishmentBatchingConfiguration> replenishmentBatchers = new List<ReplenishmentBatchingConfiguration>()
             {
