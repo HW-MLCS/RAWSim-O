@@ -11,30 +11,6 @@ using System.IO;
 
 namespace RAWSimO.Core.Items
 {
-    #region Read order CSV
-    static void ReadCSV(string path)
-    {
-        path = "combined_order_list.csv";
-        try
-        {
-            using (FileStream fs = new FileStream(path, FileMode.Open))
-            {
-                using (StreamReader sr = new StreamReader(fs, Encoding.UTF8, false))
-                {
-                    string lines = null;
-                    string[] values = null;
-
-                    while ((lines = sr.ReadLine()) != null)
-                    {
-                        if (string.IsNullOrEmpty(lines)) return;
-
-                        values = lines.Split(',');
-                    }
-                }
-            }
-        }
-    }
-    #endregion
 
     /// <summary>
     /// Defines one order.
@@ -128,36 +104,36 @@ namespace RAWSimO.Core.Items
             if (!_quantities.ContainsKey(TestitemDescription))
             {
                 _quantities[TestitemDescription] = 0;
-                _servedQuantities[itemDescription] = 0;
+                _servedQuantities[TestitemDescription] = 0;
             }
-            _quantities[itemDescription] += count;
+            _quantities[TestitemDescription] += count;
             _overallQuantity += count;
         }
         /// <summary>
         /// Adds the request to pick the item to the order. This can be used by other components to see the particular requests' status.
         /// </summary>
-        /// <param name="itemDescription">The SKU to add the request for.</param>
+        /// <param name="TestitemDescription">The SKU to add the request for.</param>
         /// <param name="request">The particular request to pick the item.</param>
-        public void AddRequest(ItemDescription itemDescription, ExtractRequest request)
-        { if (!_requests.ContainsKey(itemDescription)) _requests[itemDescription] = new HashSet<ExtractRequest>(); _requests[itemDescription].Add(request); }
+        public void AddRequest(TestItemDescription TestitemDescription, ExtractRequest request)
+        { if (!_requests.ContainsKey(TestitemDescription)) _requests[TestitemDescription] = new HashSet<ExtractRequest>(); _requests[TestitemDescription].Add(request); }
         /// <summary>
         /// Returns the number of units needed to fulfill the given position.
         /// </summary>
         /// <param name="item">The SKU.</param>
         /// <returns>Number of units necessary to fulfill the position corresponding to the given SKU.</returns>
-        public int PositionOverallCount(ItemDescription item) { return _quantities.ContainsKey(item) ? _quantities[item] : 0; }
+        public int PositionOverallCount(TestItemDescription item) { return _quantities.ContainsKey(item) ? _quantities[item] : 0; }
         /// <summary>
-        /// Returns the number of units picked so far for the given position.
+        /// Returns the number of units picked so far for the given position. 한 주문에서 item 선택된 양
         /// </summary>
         /// <param name="item">The SKU.</param>
         /// <returns>Number of units picked so far for the position corresponding to the given SKU.</returns>
-        public int PositionServedCount(ItemDescription item) { return _servedQuantities.ContainsKey(item) ? _servedQuantities[item] : 0; }
+        public int PositionServedCount(TestItemDescription item) { return _servedQuantities.ContainsKey(item) ? _servedQuantities[item] : 0; }
         /// <summary>
         /// Fulfills one unit of this order.
         /// </summary>
         /// <param name="item">The physical unit used to fulfill a part of the order.</param>
         /// <returns>Indicates whether fulfilling one unit of the order was successful.</returns>
-        public bool Serve(ItemDescription item)
+        public bool Serve(TestItemDescription item)
         {
             _overallServedQuantity++;
             if (_servedQuantities[item] < _quantities[item])
@@ -211,13 +187,13 @@ namespace RAWSimO.Core.Items
         /// </summary>
         /// <param name="item">The position.</param>
         /// <returns>The quantity of the position.</returns>
-        public int GetInfoServedCount(IItemDescriptionInfo item) { return _servedQuantities[item as ItemDescription]; }
+        public int GetInfoServedCount(IItemDescriptionInfo item) { return _servedQuantities[item as TestItemDescription]; }
         /// <summary>
         /// Gets the given position's already served quantity.
         /// </summary>
         /// <param name="item">The position.</param>
         /// <returns>The already served quantity of the position.</returns>
-        public int GetInfoDemandCount(IItemDescriptionInfo item) { return _quantities[item as ItemDescription]; }
+        public int GetInfoDemandCount(IItemDescriptionInfo item) { return _quantities[item as TestItemDescription]; }
         /// <summary>
         /// Indicates whether the order is already completed.
         /// </summary>

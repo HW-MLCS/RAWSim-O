@@ -10,13 +10,16 @@ namespace RAWSimO.Core.Items
     /// <summary>
     /// Defines a list of orders and bundles that can be used to feed an offline generated list to the simulation instead of generating them online.
     /// </summary>
+    /// 
+   
+
     public class OrderList
     {
         /// <summary>
         /// Creates a new order list.
         /// </summary>
         /// <param name="type">The type of the items in the list.</param>
-        internal OrderList(ItemType type) { Type = type; ItemDescriptions = new List<ItemDescription>(); Orders = new List<Order>(); Bundles = new List<ItemBundle>(); }
+        internal OrderList(ItemType type) { Type = type; TestItemDescriptions = new List<TestItemDescription>(); Orders = new List<TestOrder>(); Bundles = new List<ItemBundle>(); }
 
         /// <summary>
         /// The type of the items in this order list.
@@ -26,7 +29,7 @@ namespace RAWSimO.Core.Items
         /// <summary>
         /// All item-descriptions of all orders in this order list.
         /// </summary>
-        public List<ItemDescription> ItemDescriptions { get; private set; }
+        public List<TestItemDescription> TestItemDescriptions { get; private set; }
 
         /// <summary>
         /// All orders of this order list sorted by their placement timestamp.
@@ -52,9 +55,9 @@ namespace RAWSimO.Core.Items
             string delimiter = "-";
             return
                 Type.ToString() + delimiter +
-                ItemDescriptions.Count.ToString() + delimiter +
+                TestItemDescriptions.Count.ToString() + delimiter +
                 Bundles.Count.ToString() + delimiter +
-                Orders.Count.ToString() + delimiter +
+                TestOrders.Count.ToString() + delimiter +
                 Math.Abs((Orders.Max(o => o.TimeStamp) - Orders.Min(o => o.TimeStamp))).ToString(IOConstants.EXPORT_FORMAT_SHORT, IOConstants.FORMATTER);
         }
     }

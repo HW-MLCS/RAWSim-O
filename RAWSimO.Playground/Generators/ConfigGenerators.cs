@@ -111,11 +111,11 @@ namespace RAWSimO.Playground.Generators
                                 setting.InventoryConfiguration.ReturnOrderProbability = returnOrderProbability;
                                 setting.CommentTag1 = "Scen" +
                                     "-SKU" + skuFile.Value +
-                                    "-O" + (orderSizeScenario == 1 ? "M" : (orderSizeScenario == 2 ? "S" : "L")) +
+                                    "-O" + (orderSizeScenario == 1 ? "M" : (orderSizeScenario == 2 ? "S" : (orderSizeScenario == 3 ? "L" : "K"))) +
                                     "-RO" + (returnOrderProbability > 0 ? "t" : "f");
                                 string name = "MaTi" +
                                     "-SKU" + skuFile.Value +
-                                    "-O" + (orderSizeScenario == 1 ? "M" : (orderSizeScenario == 2 ? "S" : "L")) +
+                                    "-O" + (orderSizeScenario == 1 ? "M" : (orderSizeScenario == 2 ? "S" : : (orderSizeScenario == 3 ? "L" : "K"))) +
                                     "-RO" + (returnOrderProbability > 0 ? "t" : "f") +
                                     "-BPOS" + botsPerStation.ToString(IOConstants.EXPORT_FORMAT_SHORTEST_BY_ROUNDING, IOConstants.FORMATTER) +
                                     //"-C" + pickStationCapacity.ToString(IOConstants.FORMATTER) +

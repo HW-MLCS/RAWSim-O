@@ -57,8 +57,6 @@ namespace RAWSimO.Core.Generator
             int maxBundleSize,
             double relativeBundleCount)
         {
-            // Init random
-            IRandomizer randomizer = new RandomizerSimple(seed);
             // Read the words that serve as the base for the item types
             List<string> baseWords = new List<string>();
             using (StreamReader sr = new StreamReader(wordFile))
@@ -77,15 +75,36 @@ namespace RAWSimO.Core.Generator
                 foreach (var color in baseColors)
                     orderList.ItemDescriptions.Add(new ColoredLetterDescription(null) { ID = currentItemDescriptionID++, Color = color, Letter = letter, Weight = randomizer.NextDouble(minItemWeight, maxItemWeight) });
 
-            // --> Generate orders randomly
-            for (int i = 0; i < orderCount; i++)
-            {
-                // Choose a random word from the list
-                string word = baseWords[randomizer.NextInt(baseWords.Count)];
-                Order order = new Order() { TimeStamp = randomizer.NextDouble(minTime, maxTime) };
 
-                // Add each letter to originalLetters
-                for (int j = 0; j < word.Length; j++)
+             #region Read order CSV
+            static void ReadCSV(string path)
+            {
+                path = "combined_order_list.csv";
+                try
+                {
+                    using (FileStream fs = new FileStream(path, FileMode.Open))
+                    {
+                        using (StreamReader sr = new StreamReader(fs, Encoding.UTF8, false))
+                        {
+                            string lines = null;
+                            string[] values = null;
+
+                            while ((lines = sr.ReadLine()) != null)
+                            {
+                                if (string.IsNullOrEmpty(lines)) return;
+
+                                values = lines.Split(',');
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; lines != null; i++)
+            {
+                TestOrder order = new TestOrder() { TimeStamp = randomizer.NextDouble(minTime, maxTime) };
+            
+                for (int j = 0; j < values.Length; j++)
                 {
                     // Get color based on distribution
                     double r = randomizer.NextDouble();
@@ -103,7 +122,7 @@ namespace RAWSimO.Core.Generator
 
                     // Add letter to order
                     order.AddPosition(
-                        orderList.ItemDescriptions.Single(d => (d as ColoredLetterDescription).Letter == word[j] && (d as ColoredLetterDescription).Color == chosenColor),
+                        orderList.ItemDescriptions.Single(d => (d as ColoredLetterDescription).Letter == values[j] && (d as ColoredLetterDescription).Color == chosenColor),
                         randomizer.NextInt(minPositionCount, maxPositionCount + 1));
                 }
 
@@ -204,7 +223,7 @@ namespace RAWSimO.Core.Generator
             /// <summary>
             /// The number of item types to generate.
             /// </summary>
-            public int ItemDescriptionCount = 100;
+            public int ItemDescriptionCount = 134;
             /// <summary>
             /// The probability for using the combined probability over the simple probability per item type.
             /// </summary>
@@ -220,7 +239,7 @@ namespace RAWSimO.Core.Generator
             /// <summary>
             /// Defines the type of distribution used when generating the probability weights for the item descritptions.
             /// </summary>
-            public ItemDescriptionProbabilityWeightDistributionType ProbWeightDistributionType = ItemDescriptionProbabilityWeightDistributionType.Gamma;
+            public ItemDescriptionProbabilityWeightDistributionType ProbWeightDistributionType = ItemDescriptionProbabilityWeightDistributionType.Uniform;
             /// <summary>
             /// The constant probability weight to use when assigning the probability weights. This actually does make no difference, because the probability will be equal anyway.
             /// </summary>
