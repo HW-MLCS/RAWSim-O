@@ -1,4 +1,4 @@
-Ôªøusing RAWSimO.Core.Info;
+using RAWSimO.Core.Info;
 using RAWSimO.Toolbox;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace RAWSimO.Core.Items
     /// <summary>
     /// Implements a basic item description, i.e. SKU.
     /// </summary>
-    public abstract class ItemDescription : InstanceElement, IItemDescriptionInfo, IExposeVolatileID
+    public abstract class TestItemDescription : InstanceElement, IItemDescriptionInfo, IExposeVolatileID
     {
         #region Constructor
 
@@ -20,7 +20,7 @@ namespace RAWSimO.Core.Items
         /// Creates a new item-description.
         /// </summary>
         /// <param name="instance">The instance this item-description belongs to.</param>
-        internal ItemDescription(Instance instance) : base(instance) { }
+        internal TestitemDescription(Instance instance) : base(instance) { }
 
         #endregion
 
@@ -97,7 +97,7 @@ namespace RAWSimO.Core.Items
         /// <summary>
         /// An ID that is useful as an index for listing this item.
         /// This ID is unique among all <code>ItemDescription</code>s while being as low as possible.
-        /// Note: For now the volatile ID matches the actual ID. ÌúòÎ∞úÏÑ± ÏïÑÏù¥Îîî
+        /// Note: For now the volatile ID matches the actual ID. »÷πﬂº∫ æ∆¿Ãµ
         /// </summary>
         int IExposeVolatileID.VolatileID { get { return VolatileID; } }
 
