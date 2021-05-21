@@ -99,15 +99,42 @@ namespace RAWSimO.Core.Items
         /// </summary>
         /// <param name="TestitemDescription">The item description of the line.</param>
         /// <param name="count">The quantity.</param>
-        public void AddPosition(TestItemDescription TestitemDescription, int count)
+        /// lines는 order 전체 한줄이 한 order
+        /// values는 order의 sku 하나하나
+        static void ReadCSV(string path)
         {
-            if (!_quantities.ContainsKey(TestitemDescription))
+            path = "combined_order_list.csv";
+            try
             {
-                _quantities[TestitemDescription] = 0;
-                _servedQuantities[TestitemDescription] = 0;
+                using (FileStream fs = new FileStream(path, FileMode.Open))
+                {
+                    using (StreamReader sr = new StreamReader(fs, Encoding.UTF8, false))
+                    {
+                        string lines = null;
+                        string[] values = null;
+                        while ((lines = sr.ReadLine()) != null)
+                        {
+                            if (string.IsNullOrEmpty(lines)) return;
+
+                            values = lines.Split(',');
+                        }
+                    }
+                }
             }
-            _quantities[TestitemDescription] += count;
-            _overallQuantity += count;
+        }
+
+        public void AddPosition(lines, int count)
+        {
+            for (int i = 0; i < lines[-1]; i++)
+            {
+                if (!_quantities.ContainsKey(lines[i]))  //False = orderline에 item이 없으면
+                {
+                    _quantities[lines[i] = 0;
+                    _servedQuantities[lines[i] = 0;
+                }
+                _quantities[TestitemDescription] += count;
+                _overallQuantity += count;
+            }
         }
         /// <summary>
         /// Adds the request to pick the item to the order. This can be used by other components to see the particular requests' status.

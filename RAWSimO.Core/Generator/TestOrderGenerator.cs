@@ -88,9 +88,10 @@ namespace RAWSimO.Core.Generator
                         {
                             string lines = null;
                             string[] values = null;
-
+                            int i = 0;
                             while ((lines = sr.ReadLine()) != null)
                             {
+                                Order order = new Order() { TimeStamp = randomizer.NextDouble(minTime, maxTime) };
                                 if (string.IsNullOrEmpty(lines)) return;
 
                                 values = lines.Split(',');
@@ -102,7 +103,7 @@ namespace RAWSimO.Core.Generator
 
             for (int i = 0; lines != null; i++)
             {
-                TestOrder order = new TestOrder() { TimeStamp = randomizer.NextDouble(minTime, maxTime) };
+                Order order = new Order() { TimeStamp = randomizer.NextDouble(minTime, maxTime) };
             
                 for (int j = 0; j < values.Length; j++)
                 {
