@@ -288,6 +288,8 @@ namespace RAWSimO.Playground.Generators
                 new TurnoverItemStorageConfiguration() { Name = "Class" },
                 // LeastDemand
                 new LeastDemandItemStorageConfiguration() { Name = "LeastDemand" },
+                // Fixed
+                new FixedItemStorageConfiguration() { Name = "Fixed" },
             };
             List<PodStorageConfiguration> podStoragers = new List<PodStorageConfiguration>()
             {

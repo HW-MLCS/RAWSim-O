@@ -174,6 +174,10 @@ namespace RAWSimO.Core.Configurations
         /// An approach that aims to allocate items to the least demanded pods.
         /// </summary>
         LeastDemand,
+        /// <summary>
+        /// An approach that aims to allocate items to the fixed pods.
+        /// </summary>
+        Fixed,
     }
     /// <summary>
     /// All types of implemented pod storage strategies.
@@ -629,6 +633,8 @@ namespace RAWSimO.Core.Configurations
     [XmlInclude(typeof(ReactiveItemStorageConfiguration))]
     [XmlInclude(typeof(EmptiestItemStorageConfiguration))]
     [XmlInclude(typeof(LeastDemandItemStorageConfiguration))]
+    [XmlInclude(typeof(FixedItemStorageConfiguration))]
+
     public abstract class ItemStorageConfiguration : ControllerConfigurationBase
     {
         /// <summary>

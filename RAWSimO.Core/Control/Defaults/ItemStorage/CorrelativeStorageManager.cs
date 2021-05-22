@@ -35,7 +35,25 @@ namespace RAWSimO.Core.Control.Defaults.ItemStorage
             Pod pod = instance.Pods
                     .Where(b => b.FitsForReservation(bundle))
                     .OrderByDescending(p => p.ItemDescriptionsContained.Sum(containedItem => instance.FrequencyTracker.GetMeasuredFrequency(bundle.ItemDescription, containedItem)))
+                                        // GetMeasuredFrequency -> new bundle과 기존의 containedItem 간의 상관관계 전부다 조사. 이를 내림차순으로 정렬(OrderByDescending)
+                                /// <summary>
+                                /// Returns the measured combined frequency of the given item type tuple. This value is updated throughout the simulation.
+                                // / </summary>
+                                // / <param name="item1">The first part of the item tuple.</param>
+                                // / <param name="item2">The second part of the item tuple.</param>
+                                // / <returns>The combined frequency of both items. This is a value between 0 and 1.</returns>
+                                // public double GetMeasuredFrequency(ItemDescription item1, ItemDescription item2)
+                                // {
+                                //     if (!_combinedTracking)
+                                //         throw new InvalidOperationException("Combined frequency tracking is disabled!");
+                                //     if (_combinedItemFrequencies.ContainsKey(item1, item2))
+                                //         return _combinedItemFrequencies[item1, item2];
+                                //     else
+                                //         return 0;
+                                // }
                     .First();
+                                // 상관관계 수치 중 제일 높은 Pod을 선정함(First())
+                                // 우리는 새로 들어온 bundle이랑 정확하게 일치하는 pod을 찾는 것
             return pod;
         }
         /// <summary>

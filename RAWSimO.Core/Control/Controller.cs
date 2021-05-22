@@ -63,6 +63,7 @@ namespace RAWSimO.Core.Control
             switch (instance.ControllerConfig.ItemStorageConfig.GetMethodType())
             {
                 case ItemStorageMethodType.Dummy: StorageManager = new DummyStorageManager(instance); break;
+                case ItemStorageMethodType.Fixed: StorageManager = new FixedStorageManager(instance); break;
                 case ItemStorageMethodType.Random: StorageManager = new RandomStorageManager(instance); break;
                 case ItemStorageMethodType.Correlative: StorageManager = new CorrelativeStorageManager(instance); break;
                 case ItemStorageMethodType.Turnover: StorageManager = new TurnoverStorageManager(instance); break;
@@ -70,6 +71,7 @@ namespace RAWSimO.Core.Control
                 case ItemStorageMethodType.Reactive: StorageManager = new ReactiveStorageManager(instance); break;
                 case ItemStorageMethodType.Emptiest: StorageManager = new EmptiestStorageManager(instance); break;
                 case ItemStorageMethodType.LeastDemand: StorageManager = new LeastDemandStorageManager(instance); break;
+                
                 default: throw new ArgumentException("Unknown storage manager: " + instance.ControllerConfig.ItemStorageConfig.GetMethodType());
             }
             // Init pod storage manager

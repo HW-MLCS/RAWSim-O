@@ -159,6 +159,21 @@ namespace RAWSimO.Core.Statistics
             else
                 return 0;
         }
+
+        /// <summary>
+        /// Returns the measured combined frequency of the given item type tuple. This value is updated throughout the simulation.
+        /// </summary>
+        /// <param name="item1">The first part of the item tuple.</param>
+        /// <param name="item2">The second part of the item tuple.</param>
+        /// <returns>The combined frequency of both items. This is a value between 0 and 1.</returns>
+        public double CheckSameItem(ItemDescription item1, ItemDescription item2)
+        {
+            if (item1 == item2) // we need to check type of "ItemDescription"
+                return 1;
+            else
+                return 0;
+        }
+
         /// <summary>
         /// Returns the order count of the given item type. This value is updated throughout the simulation but can be reset if desired.
         /// </summary>

@@ -355,5 +355,50 @@ namespace RAWSimO.Core.Configurations
         }
     }
 
+    /// <summary>
+    /// The configuration for the corresponding method.
+    /// </summary>
+    public class FixedItemStorageConfiguration : ItemStorageConfiguration
+    {
+        /// <summary>
+        /// Returns the type of the corresponding method this configuration belongs to.
+        /// </summary>
+        /// <returns>The type of the method.</returns>
+        public override ItemStorageMethodType GetMethodType() { return ItemStorageMethodType.Fixed; }
+        /// <summary>
+        /// Returns a name identifying the method.
+        /// </summary>
+        /// <returns>The name of the method.</returns>
+        public override string GetMethodName() { if (!string.IsNullOrWhiteSpace(Name)) return Name; return "isCR" + BufferThreshold.ToString(IOConstants.EXPORT_FORMAT_SHORTER, IOConstants.FORMATTER); }
+        /// <summary>
+        /// Specifies the threshold of the reserved capacity above which the pods are refilled.
+        /// </summary>
+        public double BufferThreshold = 0.8;
+        /// <summary>
+        /// The time after which buffered bundles will be allocated even if they do not meet the threshold criterion.
+        /// </summary>
+        public double BufferTimeout = 1200;
+        /// <summary>
+        /// Checks whether the item storage configuration is valid.
+        /// </summary>
+        /// <param name="errorMessage">A message describing the error if the configuration is not valid.</param>
+        /// <returns>Indicates whether the item storage configuration is valid.</returns>
+        public override bool AttributesAreValid(out String errorMessage)
+        {
+            if (BufferThreshold < 0)
+            {
+                errorMessage = "Problem with item storage configuration: BufferThreshold has to be >= 0.";
+                return false;
+            }
+            if (BufferTimeout < 0)
+            {
+                errorMessage = "Problem with item storage configuration: BufferTimeout has to be >= 0";
+                return false;
+            }
+            errorMessage = "";
+            return true;
+        }
+    }
+
     #endregion
 }

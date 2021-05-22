@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 namespace RAWSimO.Core.Control.Defaults.ItemStorage
 {
     /// <summary>
-    /// Creates a correlative storage manager that aims to assign bundles in a family based manner.
+    /// Creates a fixed storage manager that aims to assign bundles in a pre-defined(fixed) based manner.
     /// </summary>
-    public class CorrelativeStorageManager : ItemStorageManager
+    public class FixedStorageManager : ItemStorageManager
     {
         /// <summary>
         /// Creates a new instance of this manager.
         /// </summary>
         /// <param name="instance">The instance this manager belongs to.</param>
-        public CorrelativeStorageManager(Instance instance) : base(instance)
+        public FixedStorageManager(Instance instance) : base(instance)
         {
-            _config = instance.ControllerConfig.ItemStorageConfig as CorrelativeItemStorageConfiguration;
+            _config = instance.ControllerConfig.ItemStorageConfig as FixedItemStorageConfiguration;
         }
         /// <summary>
         /// Selects a pod for a bundle generated during initialization.
@@ -31,24 +31,34 @@ namespace RAWSimO.Core.Control.Defaults.ItemStorage
         /// <returns>The selected pod.</returns>
         public override Pod SelectPodForInititalInventory(Instance instance, ItemBundle bundle)
         {
-            // Add to a pod with similar content
+            // Add to a pod with same content
             Pod pod = instance.Pods
-                    .Where(b => b.FitsForReservation(bundle))
-                    .OrderByDescending(p => p.ItemDescriptionsContained.Sum(containedItem => instance.FrequencyTracker.GetMeasuredFrequency(bundle.ItemDescription, containedItem)))
+                    .Where(b => b.FitsForReservation(bundle)) // bundle -> new / instance -> 기존 
+                        //    public bool FitsForReservation(ItemBundle bundle) { return CapacityInUse + CapacityReserved + bundle.BundleWeight <= Capacity; }
+                        // Capacity 체크해서, 담길수 있는지 1차로 체크
+                    .OrderByDescending(p => p.ItemDescriptionsContained.Sum(containedItem => instance.FrequencyTracker.CheckSameItem(bundle.ItemDescription, containedItem)))
+                        // 모든 Pod의 contained Item에 대해서, 새로 들어오는 bundle과 같은지 check (Item Description으로 체크. Need to check the type of "Item Description")
+                        // 같으면 1, 그 외에는 0 
                     .First();
+                        // 가장 첫번째 pod 고름.
+                        // TODO. 그 중에서, 한번더 selection. ex)거리순으로 한번 더 정렬. or randomly 선택. 
 
-            // Add to a pod with exactly same content ? (modified by hw)
-            Pod pod = instance.Pods
-                    .Where(b => b.FitsForReservation(bundle))
-                    .OrderByDescending(p => p.ItemDescriptionsContained.Sum(containedItem => instance.FrequencyTracker.GetMeasuredFrequency(bundle.ItemDescription, containedItem)))
-                    .First();
+                    // 기존의 거리에 따라 정렬하는 코드 (Tier까지 고려해서 판단.)
+                    .OrderBy(b =>
+                    b.InUse ?
+                    Instance.WrongTierPenaltyDistance + Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance) :
+                    Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance))
+                    // Bundle이 assign된 station <-> 모든 pod 간의 거리 계산
+                    // 모든 거리 중 가장 '작은' 값 선정
 
+                    .
             return pod;
+
         }
         /// <summary>
         /// The config of this controller.
         /// </summary>
-        private CorrelativeItemStorageConfiguration _config;
+        private FixedItemStorageConfiguration _config;
 
         /// <summary>
         /// Retrieves the threshold value above which buffered decisions for that respective pod are submitted to the system.
@@ -75,17 +85,17 @@ namespace RAWSimO.Core.Control.Defaults.ItemStorage
                 // Find a pod
                 Pod chosenPod = Instance.Pods
                     .Where(b => b.FitsForReservation(bundle))
-                    .OrderByDescending(p => p.ItemDescriptionsContained.Sum(containedItem => Instance.FrequencyTracker.GetMeasuredFrequency(bundle.ItemDescription, containedItem)))
+                    .OrderByDescending(p => p.ItemDescriptionsContained.Sum(containedItem => Instance.FrequencyTracker.CheckSameItem(bundle.ItemDescription, containedItem)))
                     .FirstOrDefault();
 
-                // Find a pod -> based closetLocation
-                Pod chosenPod = Instance.Pods
-                    .Where(b => b.FitsForReservation(bundle))
-                    .OrderBy(b =>
-                        b.InUse ?
-                        Instance.WrongTierPenaltyDistance + Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance) :
-                        Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance))
-                    .FirstOrDefault();
+                // // Find a pod -> based closetLocation
+                // Pod chosenPod = Instance.Pods
+                //     .Where(b => b.FitsForReservation(bundle))
+                //     .OrderBy(b =>
+                //         b.InUse ?
+                //         Instance.WrongTierPenaltyDistance + Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance) :
+                //         Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance))
+                //     .FirstOrDefault();
 
                 // If we found a pod, assign the bundle to it
                 if (chosenPod != null)
