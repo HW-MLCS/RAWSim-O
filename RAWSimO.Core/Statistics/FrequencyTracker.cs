@@ -168,7 +168,12 @@ namespace RAWSimO.Core.Statistics
         /// <returns>The combined frequency of both items. This is a value between 0 and 1.</returns>
         public double CheckSameItem(ItemDescription item1, ItemDescription item2)
         {
-            if (item1 == item2) // we need to check type of "ItemDescription"
+            // item1 = bundle.ItemDescription, item2 = containedItem
+            // Check the "ItemDescription"
+            string string_1 = item1.GetInfoDescription();
+            string string_2 = item2.GetInfoDescription();
+            bool result = string_1.Equals(string_2);
+            if (result)
                 return 1;
             else
                 return 0;

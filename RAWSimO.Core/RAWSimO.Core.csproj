@@ -97,6 +97,7 @@
     <Compile Include="Control\Allocator.cs" />
     <Compile Include="Control\BotManagerCore.cs" />
     <Compile Include="Control\Defaults\ItemStorage\EmptiestStorageManager.cs" />
+    <Compile Include="Control\Defaults\ItemStorage\FixedStorageManager.cs" />
     <Compile Include="Control\Defaults\ItemStorage\LeastDemandStorageManager.cs" />
     <Compile Include="Control\Defaults\ItemStorage\ReactiveStorageManager.cs" />
     <Compile Include="Control\Defaults\MethodManagement\ScheduleMethodManager.cs" />

@@ -50,8 +50,6 @@ namespace RAWSimO.Core.Control.Defaults.ItemStorage
                     Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance))
                     // Bundle이 assign된 station <-> 모든 pod 간의 거리 계산
                     // 모든 거리 중 가장 '작은' 값 선정
-
-                    .
             return pod;
 
         }
