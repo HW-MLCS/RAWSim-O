@@ -43,13 +43,13 @@ namespace RAWSimO.Core.Control.Defaults.ItemStorage
                         // 가장 첫번째 pod 고름.
                         // TODO. 그 중에서, 한번더 selection. ex)거리순으로 한번 더 정렬. or randomly 선택. 
 
-                    // 기존의 거리에 따라 정렬하는 코드 (Tier까지 고려해서 판단.)
-                    .OrderBy(b =>
-                    b.InUse ?
-                    Instance.WrongTierPenaltyDistance + Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance) :
-                    Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance))
-                    // Bundle이 assign된 station <-> 모든 pod 간의 거리 계산
-                    // 모든 거리 중 가장 '작은' 값 선정
+                        // (기존) 거리에 따라 정렬하는 코드 (Tier까지 고려해서 판단.)
+                    // .OrderBy(b =>
+                    // b.InUse ?
+                    // Instance.WrongTierPenaltyDistance + Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance) :
+                    // Distances.CalculateEuclid(_bundleToStation[bundle], b, Instance.WrongTierPenaltyDistance))
+                        // Bundle이 assign된 station <-> 모든 pod 간의 거리 계산
+                        // 모든 거리 중 가장 '작은' 값 선정
             return pod;
 
         }
