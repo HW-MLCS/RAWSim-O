@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SettingConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<SettingConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>Letter-Fixed-172800</Name>
   <SimulationWarmupTime>0</SimulationWarmupTime>
   <SimulationDuration>172800</SimulationDuration>
@@ -56,7 +56,7 @@
       <InventoryLevelOrderRestartThreshold>0.6</InventoryLevelOrderRestartThreshold>
     </DemandInventoryConfiguration>
     <FixedInventoryConfiguration>
-      <OrderFile>Letter-75-9-100-3589.23.xitem</OrderFile>
+      <OrderFile />
     </FixedInventoryConfiguration>
     <SimpleItemConfiguration>
       <GeneratorConfigFile>Mu-1000.xgenc</GeneratorConfigFile>

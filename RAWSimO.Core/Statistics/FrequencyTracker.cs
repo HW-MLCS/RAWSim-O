@@ -170,10 +170,15 @@ namespace RAWSimO.Core.Statistics
         {
             // item1 = bundle.ItemDescription, item2 = containedItem
             // Check the "ItemDescription"
-            string string_1 = item1.GetInfoDescription();
-            string string_2 = item2.GetInfoDescription();
-            bool result = string_1.Equals(string_2);
-            if (result)
+            
+            // string string_1 = item1.GetInfoDescription();
+            // string string_2 = item2.GetInfoDescription();
+            // bool result = string_1.Equals(string_2);
+
+            int ID_1 = item1.VolatileID;
+            int ID_2 = item2.VolatileID; // OR just USE item#.ID
+            
+            if (ID_1 == ID_2)
                 return 1;
             else
                 return 0;
