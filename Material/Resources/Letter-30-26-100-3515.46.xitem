@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<OrderList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Type="Letter">
+<OrderList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Type="SimpleItem">
   <ItemDescriptions>
-    <ItemDescription ID="0" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="1" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="2" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="3" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="4" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="5" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="6" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="7" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="8" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="9" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="10" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="11" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="12" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="13" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="14" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="15" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="16" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="17" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="18" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="19" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="20" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="21" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="22" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="23" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="24" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="25" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="26" Type="SimpleItem" Weight="5" Color="Red" />
-    <ItemDescription ID="27" Type="SimpleItem" Weight="5" Color="Blue" />
-    <ItemDescription ID="28" Type="SimpleItem" Weight="5" Color="Green" />
-    <ItemDescription ID="29" Type="SimpleItem" Weight="5" Color="Red" />
+    <ItemDescription ID="0" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="1" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="2" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="3" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="4" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="5" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="6" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="7" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="8" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="9" Type="SimpleItem" Weight="5" />
+    <ItemDescription ID="10" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="11" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="12" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="13" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="14" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="15" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="16" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="17" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="18" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="19" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="20" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="21" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="22" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="23" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="24" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="25" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="26" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="27" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="28" Type="SimpleItem" Weight="5"  />
+    <ItemDescription ID="29" Type="SimpleItem" Weight="5"  />
   </ItemDescriptions>
   <ItemBundles>
     <ItemBundle TimeStamp="37.785339559328435" ItemDescription="14" Size="9" />

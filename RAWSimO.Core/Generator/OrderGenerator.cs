@@ -106,7 +106,6 @@ namespace RAWSimO.Core.Generator
                         orderList.ItemDescriptions.Single(d => (d as ColoredLetterDescription).Letter == word[j] && (d as ColoredLetterDescription).Color == chosenColor),
                         randomizer.NextInt(minPositionCount, maxPositionCount + 1));
                 }
-
                 // Add the order
                 orderList.Orders.Add(order);
             }
