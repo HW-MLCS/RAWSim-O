@@ -175,8 +175,8 @@ namespace RAWSimO.Core.Statistics
             // string string_2 = item2.GetInfoDescription();
             // bool result = string_1.Equals(string_2);
 
-            int ID_1 = item1.VolatileID;
-            int ID_2 = item2.VolatileID; // OR just USE item#.ID
+            int ID_1 = item1.ID;
+            int ID_2 = item2.ID; // OR just USE item#.VolatileID
             
             if (ID_1 == ID_2)
                 return 1;
