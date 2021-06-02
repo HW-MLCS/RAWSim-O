@@ -722,7 +722,7 @@ namespace RAWSimO.Core.Management
             int n = Pod_list.Count(); // Length of the Pod_list
             // Random Number for choosing random itemdescription from xitem files
             // int i = _itemDescriptions.Count(); // Length of the ItemDescription list
-            string itemsetPath = IOHelper.FindResourceFile("itemset.csv", Directory.GetCurrentDirectory());
+            string itemsetPath = IOHelper.FindResourceFile("0.02_test.csv", Directory.GetCurrentDirectory());
             using (StreamReader sr = new StreamReader(itemsetPath))
             {
                 while (!sr.EndOfStream)
@@ -733,8 +733,16 @@ namespace RAWSimO.Core.Management
                     List<int> tmp_apriori_list = new List<int>();
                     for (int cnt = 0; cnt < temp.Count()-1; cnt++)
                     {
-                        int item_id = Int32.Parse(temp[cnt]);
-                        tmp_apriori_list.Add(item_id);
+                        if(string.IsNullOrEmpty(temp[cnt]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            int item_id = Int32.Parse(temp[cnt]);
+                            tmp_apriori_list.Add(item_id);
+                        }
+
                     }
                     Fixed_itemDescrpitions.Add(tmp_apriori_list);
                 }
