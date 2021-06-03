@@ -6,9 +6,9 @@ ID = range(1,135)
 # order 10,000~100,000개를 
 # Time / Limit = 3.6
 Time = 50000
-interval_Bundle = 10
-Limit = 1000
-item_limit = 2
+interval_Bundle = 5    # small
+Limit = 10000
+item_limit = 3
 flag1 = 0
 flag2 = 0
 # Read Csv File
@@ -26,7 +26,7 @@ for i, _order in enumerate(orders):
 # print(orders[3])
 
 #--------------------------------------------------------------#
-file_name = "0602_orderlines_" + str(Limit) + "_" + str(Time) + ".xitem"
+file_name = "0603_orderlines_" + str(Limit) + "_" + str(Time) + ".xitem"
 xitem_file = open(file_name, 'w')
 xitem_file.write('<?xml version="1.0" encoding="utf-8"?>\n')
 xitem_file.write('<OrderList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Type="Letter">\n')
@@ -34,7 +34,7 @@ xitem_file.write('<OrderList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:
 # Write ItemDescription 
 xitem_file.write("  <ItemDescriptions>\n")
 for i in ID:
-    xitem_file.write('    <ItemDescription ID="{}" Type="SimpleItem" Weight="5"/>\n'.format(i))
+    xitem_file.write('    <ItemDescription ID="{}" Type="SimpleItem" Weight="1"/>\n'.format(i))
 xitem_file.write("  </ItemDescriptions>\n")
 
 # Write ItemBundle
@@ -72,13 +72,16 @@ for i, one_order in enumerate(orders):
                 selected_item.append(sku)
 
     elif (i%interval_Bundle == 0):
-        one_item = np.random.choice(selected_item, 1)
-        item_timestamp = np.random.uniform(current_time, current_time + interval,1)
-        size = temp_item_number[one_item-1]
-        if size == 0:
-            size = total_item_number[one_item-1] - round_item_number[one_item-1]
-        # write a line of itembundle
-        xitem_file.write('    <ItemBundle TimeStamp="{}" ItemDescription="{}" Size="{}" />\n'.format(float(item_timestamp), int(one_item), int(size)))
+        for j in range(0,5):
+            one_item = np.random.sample(selected_item, 5)
+            item_timestamp = np.random.uniform(current_time, current_time + interval/5, 1)
+            size = temp_item_number[one_item[j]-1]
+            if size == 0:
+                size = total_item_number[one_item[j]-1] - round_item_number[one_item[j]-1]
+            # write a line of itembundle
+            xitem_file.write('    <ItemBundle TimeStamp="{}" ItemDescription="{}" Size="{}" />\n'.format(float(item_timestamp), int(one_item[j]), int(size)))
+            current_time += interval/5
+
         current_time = interval*(i+1)
         # Initialize
         temp_item_number = np.zeros(134)
