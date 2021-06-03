@@ -47,7 +47,7 @@ round_item_number = np.zeros(134)
 current_time = 0
 interval = float(Time / Limit)
 selected_item = []
-
+one_item = []
 # randomly set interval of itembundle's timestamp
 for i, one_order in enumerate(orders):
     for sku in range(1,135):
