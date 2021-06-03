@@ -769,41 +769,11 @@ namespace RAWSimO.Core.Management
                 }
             }
             // 균등 배분
-            //while (n > -1)
-            //{
-            //    int k = Fixed_itemDescrpitions.Count(); // Random Number
-            //    int max_itemsinPod = 100; // Maximum number of items in a Pod
-            //    //Matching the Pod and the bundle (Itemset We Made)
-            //    for (int cnt = 0; cnt < k; cnt++)
-            //    {
-            //        n--; //For n-th Iteration
-            //        if (n == -1)
-            //        {
-            //            break;
-            //        }
-            //        int itemset_length = Fixed_itemDescrpitions[cnt].Count();
-            //        int bundle_size = (int)decimal.Round(max_itemsinPod / itemset_length);
-            //        int itemsinPod = 0;
-            //        for (int j = 0; j < itemset_length; j++)
-            //        {
-            //            int item_id = Fixed_itemDescrpitions[cnt][j];
-            //            if (j == itemset_length - 1)
-            //            {
-            //                bundle_size = max_itemsinPod - itemsinPod;
-            //            }
-            //            ItemBundle Fixed_bundle = Instance.CreateItemBundle(_itemDescriptions[item_id], bundle_size); // Only for 1 itemdescription (Ex. a/6)
-            //            Pod_list[(Pod_list.Count - 1 - n)].Add(Fixed_bundle); // Add the Bundle to the pod
-            //            Instance.NotifyInitialBundleStored(Fixed_bundle, Pod_list[(Pod_list.Count - 1 - n)]); // Notification
-            //            itemsinPod += bundle_size;
-            //        }
-            //    }
-            //}
-            // Support value 배분
             while (n > -1)
             {
                 int k = Fixed_itemDescrpitions.Count(); // Random Number
-                int max_itemsinPod = 100; // Maximum number of items in a Pod
-                                          //Matching the Pod and the bundle (Itemset We Made)
+                int max_itemsinPod = 400; // Maximum number of items in a Pod
+                //Matching the Pod and the bundle (Itemset We Made)
                 for (int cnt = 0; cnt < k; cnt++)
                 {
                     n--; //For n-th Iteration
@@ -812,15 +782,10 @@ namespace RAWSimO.Core.Management
                         break;
                     }
                     int itemset_length = Fixed_itemDescrpitions[cnt].Count();
-                    double total_support = 0;
-                    for (int i = 0; i < itemset_length; i++)
-                    {
-                        total_support += itemlist_support[Fixed_itemDescrpitions[cnt][i]-1];
-                    }
+                    int bundle_size = (int)decimal.Round(max_itemsinPod / itemset_length);
                     int itemsinPod = 0;
                     for (int j = 0; j < itemset_length; j++)
                     {
-                        int bundle_size = (int)Math.Round((itemlist_support[Fixed_itemDescrpitions[cnt][j]-1] / total_support) * max_itemsinPod);
                         int item_id = Fixed_itemDescrpitions[cnt][j]-1;
                         if (j == itemset_length - 1)
                         {
@@ -833,6 +798,41 @@ namespace RAWSimO.Core.Management
                     }
                 }
             }
+            // Support value 배분
+            //while (n > -1)
+            //{
+            //    int k = Fixed_itemDescrpitions.Count(); // Random Number
+            //    int max_itemsinPod = 400; // Maximum number of items in a Pod
+            //                              //Matching the Pod and the bundle (Itemset We Made)
+            //    for (int cnt = 0; cnt < k; cnt++)
+            //    {
+            //        n--; //For n-th Iteration
+            //        if (n == -1)
+            //        {
+            //            break;
+            //        }
+            //        int itemset_length = Fixed_itemDescrpitions[cnt].Count();
+            //        double total_support = 0;
+            //        for (int i = 0; i < itemset_length; i++)
+            //        {
+            //            total_support += itemlist_support[Fixed_itemDescrpitions[cnt][i]-1];
+            //        }
+            //        int itemsinPod = 0;
+            //        for (int j = 0; j < itemset_length; j++)
+            //        {
+            //            int bundle_size = (int)Math.Round((itemlist_support[Fixed_itemDescrpitions[cnt][j]-1] / total_support) * max_itemsinPod);
+            //            int item_id = Fixed_itemDescrpitions[cnt][j]-1;
+            //            if (j == itemset_length - 1)
+            //            {
+            //                bundle_size = max_itemsinPod - itemsinPod;
+            //            }
+            //            ItemBundle Fixed_bundle = Instance.CreateItemBundle(_itemDescriptions[item_id], bundle_size); // Only for 1 itemdescription (Ex. a/6)
+            //            Pod_list[(Pod_list.Count - 1 - n)].Add(Fixed_bundle); // Add the Bundle to the pod
+            //            Instance.NotifyInitialBundleStored(Fixed_bundle, Pod_list[(Pod_list.Count - 1 - n)]); // Notification
+            //            itemsinPod += bundle_size;
+            //        }
+            //    }
+            //}
         }
 
 
