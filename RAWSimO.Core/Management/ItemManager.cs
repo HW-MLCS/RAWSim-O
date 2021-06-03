@@ -772,7 +772,7 @@ namespace RAWSimO.Core.Management
             while (n > -1)
             {
                 int k = Fixed_itemDescrpitions.Count(); // Random Number
-                int max_itemsinPod = 400; // Maximum number of items in a Pod
+                int max_itemsinPod = 800; // Maximum number of items in a Pod
                 //Matching the Pod and the bundle (Itemset We Made)
                 for (int cnt = 0; cnt < k; cnt++)
                 {
