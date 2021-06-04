@@ -5,9 +5,9 @@ import numpy as np
 ID = range(1,135)
 # order 10,000~100,000개를 
 # Time / Limit = 3.6
-Time = 36000
+Time = 18000
 interval_Bundle = 1    # small
-Limit = 10000
+Limit = 5000
 item_limit = 0
 flag1 = 0
 flag2 = 0

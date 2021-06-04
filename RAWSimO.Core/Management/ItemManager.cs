@@ -684,8 +684,8 @@ namespace RAWSimO.Core.Management
                         foreach (var itemDescription in _itemDescriptions)
                             _itemDemandInformation[itemDescription] = _futureOrders.SelectMany(o => o.Positions).Where(p => p.Key == itemDescription).Sum(p => p.Value);
                         // Generate random pod content
-                        //InitializePodContentsRandomly(Instance.SettingConfig.InventoryConfiguration.InitialInventory);
-                        InitializePodContentsFixed(_itemDescriptions);
+                        InitializePodContentsRandomly(Instance.SettingConfig.InventoryConfiguration.InitialInventory);
+                        //InitializePodContentsFixed(_itemDescriptions);
                         #endregion
                     }
                     break;
@@ -772,7 +772,6 @@ namespace RAWSimO.Core.Management
             while (n > -1)
             {
                 int k = Fixed_itemDescrpitions.Count(); // Random Number
-                int max_itemsinPod = 800; // Maximum number of items in a Pod
                 //Matching the Pod and the bundle (Itemset We Made)
                 for (int cnt = 0; cnt < k; cnt++)
                 {
@@ -782,19 +781,41 @@ namespace RAWSimO.Core.Management
                         break;
                     }
                     int itemset_length = Fixed_itemDescrpitions[cnt].Count();
-                    int bundle_size = (int)decimal.Round(max_itemsinPod / itemset_length);
+
                     int itemsinPod = 0;
+                    int max_itemsinPod = 800; // Maximum number of items in a Pod
                     for (int j = 0; j < itemset_length; j++)
                     {
-                        int item_id = Fixed_itemDescrpitions[cnt][j]-1;
-                        if (j == itemset_length - 1)
+                        if (Fixed_itemDescrpitions[cnt][j] == 24 || Fixed_itemDescrpitions[cnt][j] == 83 || Fixed_itemDescrpitions[cnt][j] == 123)
                         {
-                            bundle_size = max_itemsinPod - itemsinPod;
+                            int item_id = Fixed_itemDescrpitions[cnt][j] - 1;
+                            int bundle_size = 10;
+                            ItemBundle Fixed_bundle = Instance.CreateItemBundle(_itemDescriptions[item_id], bundle_size); // Only for 1 itemdescription (Ex. a/6)
+                            Pod_list[(Pod_list.Count - 1 - n)].Add(Fixed_bundle); // Add the Bundle to the pod
+                            Instance.NotifyInitialBundleStored(Fixed_bundle, Pod_list[(Pod_list.Count - 1 - n)]); // Notification
+                            max_itemsinPod -= bundle_size;
                         }
-                        ItemBundle Fixed_bundle = Instance.CreateItemBundle(_itemDescriptions[item_id], bundle_size); // Only for 1 itemdescription (Ex. a/6)
-                        Pod_list[(Pod_list.Count - 1 - n)].Add(Fixed_bundle); // Add the Bundle to the pod
-                        Instance.NotifyInitialBundleStored(Fixed_bundle, Pod_list[(Pod_list.Count - 1 - n)]); // Notification
-                        itemsinPod += bundle_size;
+                        else
+                        {
+                            int bundle_size;
+                            if (itemset_length - 3 == 0)
+                            {
+                                bundle_size = (int)decimal.Round(max_itemsinPod / 3);
+                            }
+                            else
+                            {
+                                bundle_size = (int)decimal.Round(max_itemsinPod / (itemset_length - 3));
+                            }
+                            int item_id = Fixed_itemDescrpitions[cnt][j] - 1;
+                            if (j == itemset_length - 1)
+                            {
+                                bundle_size = max_itemsinPod - itemsinPod;
+                            }
+                            ItemBundle Fixed_bundle = Instance.CreateItemBundle(_itemDescriptions[item_id], bundle_size); // Only for 1 itemdescription (Ex. a/6)
+                            Pod_list[(Pod_list.Count - 1 - n)].Add(Fixed_bundle); // Add the Bundle to the pod
+                            Instance.NotifyInitialBundleStored(Fixed_bundle, Pod_list[(Pod_list.Count - 1 - n)]); // Notification
+                            itemsinPod += bundle_size;
+                        }
                     }
                 }
             }
