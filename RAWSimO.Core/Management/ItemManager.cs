@@ -722,7 +722,7 @@ namespace RAWSimO.Core.Management
             int n = Pod_list.Count(); // Length of the Pod_list
             // Random Number for choosing random itemdescription from xitem files
             // int i = _itemDescriptions.Count(); // Length of the ItemDescription list
-            string itemsetPath = IOHelper.FindResourceFile("random_list.csv", Directory.GetCurrentDirectory());
+            string itemsetPath = IOHelper.FindResourceFile("random_list_3.csv", Directory.GetCurrentDirectory());
             using (StreamReader sr = new StreamReader(itemsetPath))
             {
                 while (!sr.EndOfStream)
